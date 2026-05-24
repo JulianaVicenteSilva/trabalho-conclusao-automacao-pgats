@@ -5,9 +5,9 @@
     "passes": 5,
     "pending": 0,
     "failures": 0,
-    "start": "2026-05-24T01:05:09.387Z",
-    "end": "2026-05-24T01:05:09.392Z",
-    "duration": 5,
+    "start": "2026-05-24T01:57:18.175Z",
+    "end": "2026-05-24T01:57:18.182Z",
+    "duration": 7,
     "testsRegistered": 5,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "a811051f-d917-46a8-8813-9cf8d25c3618",
+      "uuid": "ae9d2327-dc86-4c29-b190-fe169e7f0aad",
       "title": "",
       "fullFile": "C:\\projetcs\\trabalho-conclusao-automacao-pgats\\test\\servicoDePagamento.test.js",
       "file": "\\test\\servicoDePagamento.test.js",
@@ -27,8 +27,8 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "f289ccb1-39ff-4d0e-9772-0e59aaabe04e",
-          "title": "Metódo de Serviço de Pagamento:",
+          "uuid": "2b9dcab4-c966-4f5d-834f-5d6707090d6b",
+          "title": "Metódo Serviço de Pagamento:",
           "fullFile": "C:\\projetcs\\trabalho-conclusao-automacao-pgats\\test\\servicoDePagamento.test.js",
           "file": "\\test\\servicoDePagamento.test.js",
           "beforeHooks": [],
@@ -36,7 +36,7 @@
           "tests": [
             {
               "title": "Realizar pagamento com Código de Barras, Empresa e Valor",
-              "fullTitle": "Metódo de Serviço de Pagamento: Realizar pagamento com Código de Barras, Empresa e Valor",
+              "fullTitle": "Metódo Serviço de Pagamento: Realizar pagamento com Código de Barras, Empresa e Valor",
               "timedOut": false,
               "duration": 0,
               "state": "passed",
@@ -47,14 +47,14 @@
               "context": null,
               "code": "// Arrange\nconst servico = new ServicoDePagamento();\n// Act\nservico.pagar('0987-7656-3475', 'Samar', 156.87);\nconst ultimo = servico.consultarUltimoPagamento();\n// Assert\nassert.equal(ultimo.codigoBarras, '0987-7656-3475');\nassert.equal(ultimo.empresa, 'Samar');\nassert.equal(ultimo.valor, 156.87);",
               "err": {},
-              "uuid": "650562c1-c601-4f48-8348-828b9e6e79ec",
-              "parentUUID": "f289ccb1-39ff-4d0e-9772-0e59aaabe04e",
+              "uuid": "9b899ca1-8d0c-4dba-af55-539db142ffe9",
+              "parentUUID": "2b9dcab4-c966-4f5d-834f-5d6707090d6b",
               "isHook": false,
               "skipped": false
             },
             {
               "title": "Retornar categoria como \"cara\" quando valor for maior que 100",
-              "fullTitle": "Metódo de Serviço de Pagamento: Retornar categoria como \"cara\" quando valor for maior que 100",
+              "fullTitle": "Metódo Serviço de Pagamento: Retornar categoria como \"cara\" quando valor for maior que 100",
               "timedOut": false,
               "duration": 0,
               "state": "passed",
@@ -65,14 +65,14 @@
               "context": null,
               "code": "const servico = new ServicoDePagamento();\n      servico.pagar('1111-2222-3333', 'Empresa X', 150.00);\n      const ultimo = servico.consultarUltimoPagamento();\n      assert.equal(ultimo.categoria, 'cara');",
               "err": {},
-              "uuid": "c6f8f4b4-34e5-4958-b038-98f64b32239f",
-              "parentUUID": "f289ccb1-39ff-4d0e-9772-0e59aaabe04e",
+              "uuid": "2c46095c-48fc-46e0-80b8-009e1c2f61e6",
+              "parentUUID": "2b9dcab4-c966-4f5d-834f-5d6707090d6b",
               "isHook": false,
               "skipped": false
             },
             {
               "title": "Retornar categoria como \"padrão\" quando valor for igual a 100",
-              "fullTitle": "Metódo de Serviço de Pagamento: Retornar categoria como \"padrão\" quando valor for igual a 100",
+              "fullTitle": "Metódo Serviço de Pagamento: Retornar categoria como \"padrão\" quando valor for igual a 100",
               "timedOut": false,
               "duration": 0,
               "state": "passed",
@@ -83,14 +83,14 @@
               "context": null,
               "code": "const servico = new ServicoDePagamento();\n      servico.pagar('1111-2222-3333', 'Empresa Y', 100.00);\n      const ultimo = servico.consultarUltimoPagamento();\n      assert.equal(ultimo.categoria, 'padrão');",
               "err": {},
-              "uuid": "a5a801e9-2961-4d57-8be1-2cd1da878c61",
-              "parentUUID": "f289ccb1-39ff-4d0e-9772-0e59aaabe04e",
+              "uuid": "0706c74c-107e-4e58-9cdd-75b91b9ff168",
+              "parentUUID": "2b9dcab4-c966-4f5d-834f-5d6707090d6b",
               "isHook": false,
               "skipped": false
             },
             {
               "title": "Retornar categoria como \"padrão\" quando valor for menor que 100",
-              "fullTitle": "Metódo de Serviço de Pagamento: Retornar categoria como \"padrão\" quando valor for menor que 100",
+              "fullTitle": "Metódo Serviço de Pagamento: Retornar categoria como \"padrão\" quando valor for menor que 100",
               "timedOut": false,
               "duration": 0,
               "state": "passed",
@@ -101,16 +101,16 @@
               "context": null,
               "code": "const servico = new ServicoDePagamento();\n   \n      servico.pagar('4444-5555-6666', 'Empresa Z', 49.90);\n      const ultimo = servico.consultarUltimoPagamento();\n      assert.equal(ultimo.categoria, 'padrão');",
               "err": {},
-              "uuid": "8e63d47c-2797-4443-a0f6-1eabc97dffa0",
-              "parentUUID": "f289ccb1-39ff-4d0e-9772-0e59aaabe04e",
+              "uuid": "5c56f688-c524-41d6-8cd2-be7f7bfd716e",
+              "parentUUID": "2b9dcab4-c966-4f5d-834f-5d6707090d6b",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [
             {
-              "uuid": "f1c0958f-8b08-4e1e-ba94-bf4c0b1b750e",
-              "title": "Método consultar do último pagamento:",
+              "uuid": "85455524-6c66-412a-acf0-fe26c720564c",
+              "title": "Método Consulta do Ùltimo Pagamento:",
               "fullFile": "C:\\projetcs\\trabalho-conclusao-automacao-pgats\\test\\servicoDePagamento.test.js",
               "file": "\\test\\servicoDePagamento.test.js",
               "beforeHooks": [],
@@ -118,7 +118,7 @@
               "tests": [
                 {
                   "title": "Consultar o último pagamento realizado",
-                  "fullTitle": "Metódo de Serviço de Pagamento: Método consultar do último pagamento: Consultar o último pagamento realizado",
+                  "fullTitle": "Metódo Serviço de Pagamento: Método Consulta do Ùltimo Pagamento: Consultar o último pagamento realizado",
                   "timedOut": false,
                   "duration": 0,
                   "state": "passed",
@@ -129,15 +129,15 @@
                   "context": null,
                   "code": "const servico = new ServicoDePagamento();\n      servico.pagar('0001-0001-0001', 'Primeira Empresa', 50.00);\n      servico.pagar('0002-0002-0002', 'Última Empresa', 250.00);\n      const ultimo = servico.consultarUltimoPagamento();\n      assert.equal(ultimo.empresa, 'Última Empresa');\n      assert.equal(ultimo.valor, 250.00);\n      assert.equal(ultimo.categoria, 'cara');",
                   "err": {},
-                  "uuid": "316fecbf-6213-470d-b969-956d01e65c8a",
-                  "parentUUID": "f1c0958f-8b08-4e1e-ba94-bf4c0b1b750e",
+                  "uuid": "0c662799-c91b-4fd2-bac4-39872a157a77",
+                  "parentUUID": "85455524-6c66-412a-acf0-fe26c720564c",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "316fecbf-6213-470d-b969-956d01e65c8a"
+                "0c662799-c91b-4fd2-bac4-39872a157a77"
               ],
               "failures": [],
               "pending": [],
@@ -149,10 +149,10 @@
             }
           ],
           "passes": [
-            "650562c1-c601-4f48-8348-828b9e6e79ec",
-            "c6f8f4b4-34e5-4958-b038-98f64b32239f",
-            "a5a801e9-2961-4d57-8be1-2cd1da878c61",
-            "8e63d47c-2797-4443-a0f6-1eabc97dffa0"
+            "9b899ca1-8d0c-4dba-af55-539db142ffe9",
+            "2c46095c-48fc-46e0-80b8-009e1c2f61e6",
+            "0706c74c-107e-4e58-9cdd-75b91b9ff168",
+            "5c56f688-c524-41d6-8cd2-be7f7bfd716e"
           ],
           "failures": [],
           "pending": [],

@@ -3,7 +3,7 @@ import ServicoDePagamento from '../src/ServicoDePagamento.js';
 import assert from 'node:assert';
 
 // Grupo de testes relacionados ao método pagar()
-describe('Metódo de Serviço de Pagamento:', () => {
+describe('Metódo Serviço de Pagamento:', () => {
     it('Realizar pagamento com Código de Barras, Empresa e Valor', function() {
     // Arrange
     const servico = new ServicoDePagamento();
@@ -47,7 +47,7 @@ describe('Metódo de Serviço de Pagamento:', () => {
       assert.equal(ultimo.categoria, 'padrão');
  });
 
-describe('Método consultar do último pagamento:', () => {
+describe('Método Consulta do Ùltimo Pagamento:', () => {
   it('Consultar o último pagamento realizado', () => {
 
       const servico = new ServicoDePagamento();
