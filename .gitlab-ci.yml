@@ -7,8 +7,6 @@ stages:
 instalar_dependencias:
   stage: instalar
   script:
-    - node --version
-    - npm --version
     - npm install
   artifacts:
     paths:
