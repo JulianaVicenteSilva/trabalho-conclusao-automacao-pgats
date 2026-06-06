@@ -1,0 +1,26 @@
+image: node:20
+
+stages:
+  - instalar
+  - testar
+
+instalar_dependencias:
+  stage: instalar
+  script:
+    - node --version
+    - npm --version
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+
+executar_testes:
+  stage: testar
+  script:
+    - npm test
+  artifacts:
+    paths:
+      - mochawesome-report/
+    expire_in: 7 days
+    when: always
