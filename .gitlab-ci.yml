@@ -7,7 +7,8 @@ stages:
 instalar_dependencias:
   stage: instalar
   script:
-    - npm install
+    - npm install -g yarn
+    - yarn
   artifacts:
     paths:
       - node_modules/
@@ -16,7 +17,7 @@ instalar_dependencias:
 executar_testes:
   stage: testar
   script:
-    - npm test
+    - yarn test
   artifacts:
     paths:
       - mochawesome-report/
