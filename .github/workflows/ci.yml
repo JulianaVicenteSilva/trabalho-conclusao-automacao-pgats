@@ -1,0 +1,92 @@
+name: CI - Testes Automatizados
+
+on:
+  # 1. Execução por push em qualquer branch
+  push:
+    branches:
+      - "**"
+
+  # 2. Execução manual (workflow_dispatch)
+  workflow_dispatch:
+    inputs:
+      motivo:
+        description: "Motivo da execução manual"
+        required: false
+        default: "Execução solicitada manualmente"
+
+  # 3. Execução agendada (toda segunda-feira às 08h00 BRT = 11h00 UTC)
+  schedule:
+    - cron: "0 11 * * 1"
+
+jobs:
+  testes:
+    name: Executar Testes com Relatório
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Checkout do repositório
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Passo 2: Configurar Node.js
+      - name: Configurar Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      # Passo 3: Instalar dependências
+      - name: Instalar dependências
+        run: npm ci
+
+      # Passo 4: Executar testes e gerar relatório mochawesome
+      - name: Executar testes
+        run: |
+          npx mocha \
+            --reporter mochawesome \
+            --reporter-options reportDir=mochawesome-report,reportFilename=mochawesome,html=true,json=true \
+            "test/**/*.test.js"
+        # Garante que os passos seguintes executem mesmo se os testes falharem
+        continue-on-error: true
+
+      # Passo 5: Armazenar o relatório HTML como artefato da pipeline
+      - name: Publicar relatório de testes (artefato)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-mochawesome-${{ github.run_number }}
+          path: mochawesome-report/
+          retention-days: 30
+
+      # Passo 6: Exibir resumo no log da pipeline
+      - name: Resumo dos testes
+        if: always()
+        run: |
+          echo "## Resultado dos Testes" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f mochawesome-report/mochawesome.json ]; then
+            PASSES=$(cat mochawesome-report/mochawesome.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['stats']['passes'])")
+            FAILURES=$(cat mochawesome-report/mochawesome.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['stats']['failures'])")
+            TOTAL=$(cat mochawesome-report/mochawesome.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['stats']['tests'])")
+            echo "| Status | Quantidade |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-----------|" >> $GITHUB_STEP_SUMMARY
+            echo "| ✅ Passou | $PASSES |" >> $GITHUB_STEP_SUMMARY
+            echo "| ❌ Falhou | $FAILURES |" >> $GITHUB_STEP_SUMMARY
+            echo "| 📋 Total  | $TOTAL |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Arquivo de relatório não encontrado." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # Passo 7: Falhar o job caso haja testes com erro
+      - name: Verificar falhas nos testes
+        if: always()
+        run: |
+          if [ -f mochawesome-report/mochawesome.json ]; then
+            FAILURES=$(cat mochawesome-report/mochawesome.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d['stats']['failures'])")
+            if [ "$FAILURES" -gt "0" ]; then
+              echo "❌ $FAILURES teste(s) falharam. Encerrando com erro."
+              exit 1
+            else
+              echo "✅ Todos os testes passaram!"
+            fi
+          fi

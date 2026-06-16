@@ -1,5 +1,5 @@
 // Importa a classe ServicoDePagamento
-import ServicoDePagamento from '../src/ServicoDePagamento.js';
+import ServicoDePagamento from '../src/servicoDePagamento.js';
 import assert from 'node:assert';
 
 // Grupo de testes relacionados ao método pagar()
